@@ -56,6 +56,30 @@ namespace CompilersAssesment.PALCompiler
 
         private void recIO()
         {
+            if (have("INPUT"))
+            {
+                mustBe("INPUT");
+                recIdentList();
+            }
+            else if (have("OUTPUT"))
+            {
+                mustBe("OUTPUT");
+                recExpression();
+                //( , <Expression>)* = 0 or more
+                while (have(","))
+                {
+                    mustBe(",");
+                    recExpression();
+                }
+            }
+            else
+            {
+                syntaxError("<IO>");
+            }
+        }
+
+        private void recExpression()
+        {
             throw new NotImplementedException();
         }
 
