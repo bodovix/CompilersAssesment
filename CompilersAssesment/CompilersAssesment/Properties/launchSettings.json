@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "CompilersAssesment": {
+      "commandName": "Project",
+      "commandLineArgs": "C:\\Users\\Gwydion\\source\\repos\\UNIVERSITY\\CompilersAssesment\\CompilersAssesment\\CompilersAssesment\\TestSourceFIles\\valid1.txt"
+    }
+  }
+}
