@@ -79,6 +79,21 @@ namespace CompilersAssesment.PALCompiler
         }
 
         private void recExpression()
+        {//<Expression> ::= <Term> ( (+|-) <Term>)* ;   //()* = 0 or more
+            recTerm();
+            while (have("+") || have("-"))
+            {
+                if (have("+"))
+                    mustBe("+");
+                else if (have("-"))
+                    mustBe("-");
+                else
+                    syntaxError("<Expression>"); //shouldn't get hit
+                recTerm();
+            }
+        }
+
+        private void recTerm()
         {
             throw new NotImplementedException();
         }
