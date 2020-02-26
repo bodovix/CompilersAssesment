@@ -9,4 +9,9 @@
     <Folder Include="Ardkit\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="Ardkit">
+      <HintPath>..\..\..\..\UNIVERCITY\CompilersLabs\CompilersLabs\ArdkitDll\Ardkit.dll</HintPath>
+    </Reference>
+  </ItemGroup>
 </Project>
