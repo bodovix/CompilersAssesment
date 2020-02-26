@@ -1,10 +1,11 @@
-﻿using System;
+﻿using AllanMilne.PALCompiler;
+using System;
 
 namespace CompilersAssesment
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
         }
