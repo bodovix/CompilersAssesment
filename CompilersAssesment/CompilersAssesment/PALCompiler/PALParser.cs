@@ -190,8 +190,15 @@ namespace CompilersAssesment.PALCompiler
         }
 
         private void recLoop()
-        {
-            throw new NotImplementedException();
+        {//<Loop> ::= UNTIL <BooleanExpr> REPEAT (<Statement>)* ENDLOOP ;           //()* = 0 or more
+            mustBe("UNTIL");
+            recBooleanExpression();
+            mustBe("REPEAT");
+            while (have(Token.IdentifierToken) || have("UNTIL") || have("IF") || have("INPUT") || have("OUTPUT"))
+            {
+                recStatement();
+            }
+            mustBe("ENDLOOP");
         }
 
         private void recAssignment()
