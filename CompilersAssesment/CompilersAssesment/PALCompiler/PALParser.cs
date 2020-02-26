@@ -36,7 +36,22 @@ namespace CompilersAssesment.PALCompiler
         }
 
         private void recVarDecls()
+        {//()* = 0 or more
+            while (have(Token.IdentifierToken))
+            {
+                recIdentList();
+                mustBe("AS");
+                recType();
+            }
+        }
+
+        private void recType()
         {
+            throw new NotImplementedException();
+        }
+
+        private void recIdentList()
+        {//()* = 0 or more
             throw new NotImplementedException();
         }
     }
