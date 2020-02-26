@@ -14,6 +14,29 @@ namespace CompilersAssesment.PALCompiler
 
         protected override void recStarter()
         {
+            Scope.OpenScope();
+
+            mustBe("PROGRAM");
+            mustBe(Token.IdentifierToken);
+            mustBe("WITH");
+            recVarDecls();
+            mustBe("IN");
+            do
+            {
+                recStatement();   // MIGHT NEED TO LOOP THIS ( ()+ so one or more) - recursively call itself
+            } while (have(Token.IdentifierToken) || have("UNTIL") || have("IF") || have("INPUT") || have("OUTPUT")); // while has tokens for terminal operators for this
+            mustBe("END");
+
+            Scope.CloseScope();
+        }
+
+        private void recStatement()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void recVarDecls()
+        {
             throw new NotImplementedException();
         }
     }
