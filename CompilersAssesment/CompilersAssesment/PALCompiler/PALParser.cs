@@ -94,6 +94,43 @@ namespace CompilersAssesment.PALCompiler
         }
 
         private void recTerm()
+        {//<Term> ::= <Factor> ( (*|/) <Factor>)* ;    //()* = 0 or more
+            recFactor();
+            while (have("*") || have("/"))
+            {
+                if (have("*"))
+                    mustBe("*");
+                else if (have("/"))
+                    mustBe("/");
+                else
+                    syntaxError("<Term>"); //shouldn't get hit
+                recFactor();
+            }
+        }
+
+        private void recFactor()
+        {//<Factor> ::= (+|-)? ( <Value> | "(" <Expression> ")" ) ;
+            if (have("+"))
+                mustBe("+");
+            else if (have("-"))
+                mustBe("-");
+            else { }//do nothing
+
+            if (have(Token.IdentifierToken) || have(Token.IntegerToken) || have(Token.RealToken))
+            {//Value
+                recValue();
+            }
+            else if (have("("))
+            {
+                mustBe("(");
+                recExpression();
+                mustBe(")");
+            }
+            else
+                syntaxError("<Factor>");
+        }
+
+        private void recValue()
         {
             throw new NotImplementedException();
         }
