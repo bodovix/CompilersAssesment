@@ -1,4 +1,4 @@
-PROG test
+PROGRAM test
 WITH 
 a, b AS INTEGER
 c, d AS REAL

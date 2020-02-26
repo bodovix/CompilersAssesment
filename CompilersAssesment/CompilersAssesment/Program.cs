@@ -1,5 +1,6 @@
 ﻿using AllanMilne.Ardkit;
 using AllanMilne.PALCompiler;
+using CompilersAssesment.PALCompiler;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -8,34 +9,37 @@ namespace CompilersAssesment
 {
     internal class Program
     {
-        private static void Main(string[] args)
+        //==================PARSER CHECKS
+
+        public static void Main(String[] args)
         {
-            //==================SCANNER CHECKS: CANNER WORKS DONT CHANGE IT
             if (args.Length != 1)
             {
-                Console.WriteLine("Usage: arg[] missing from program.");
+                Console.WriteLine("Invalid usage: PAL <filename>");
                 return;
             }
 
-            StreamReader infile = null;
+            //--- Open the input source file.
+            StreamReader infile;
             try
             {
                 infile = new StreamReader(args[0]);
             }
             catch (IOException e)
             {
-                Console.WriteLine("I.O error opening file '{0}'. ", args[0]);
-                Console.WriteLine(e);
+                PrintReadError("opening", args[0], e);
                 return;
             }
-            List<ICompilerError> errors = new List<ICompilerError>();
-            PALScanner scanner = new PALScanner();
-            scanner.Init(infile, errors);
-            do
+
+            //--- Do what you gotta do!
+            PALParser parser = new PALParser(new PALScanner());
+
+            parser.Parse(infile);
+
+            foreach (ICompilerError err in parser.Errors)
             {
-                scanner.NextToken();
-                Display(scanner.CurrentToken);
-            } while (!scanner.EndOfFile);
+                Console.WriteLine(err);
+            }
 
             try
             {
@@ -43,19 +47,17 @@ namespace CompilersAssesment
             }
             catch (IOException e)
             {
-                Console.WriteLine("Error closing file '{0}'. ", args[0]);
-                Console.WriteLine(e);
+                PrintReadError("closing", args[0], e);
                 return;
             }
         }
 
-        private static void Display(IToken token)
+        private static void PrintReadError(String function, String filename, IOException e)
         {
-            Console.WriteLine($"{token.TokenType} at ({token.Line} {token.Column})");
-            if (!token.TokenType.Equals(token.TokenValue))
-                Console.WriteLine($"actual token : {token.TokenValue}");
+            Console.WriteLine("Source File OI error {0} file {1}.", function, filename);
+            Console.WriteLine(e);
         }
-
-        //=============================================================
     }
+
+    //=============================================================
 }
