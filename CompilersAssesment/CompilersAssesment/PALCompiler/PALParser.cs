@@ -9,6 +9,7 @@ namespace CompilersAssesment.PALCompiler
     {
         public PALParser(IScanner scan) : base(scan)
         {
+            scanner = scan;
         }
 
         protected override void recStarter()
