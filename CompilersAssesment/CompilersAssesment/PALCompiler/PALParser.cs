@@ -203,7 +203,9 @@ namespace CompilersAssesment.PALCompiler
 
         private void recAssignment()
         {
-            throw new NotImplementedException();
+            mustBe(Token.IdentifierToken);
+            mustBe("=");
+            recExpression();
         }
 
         private void recVarDecls()
@@ -231,8 +233,13 @@ namespace CompilersAssesment.PALCompiler
         }
 
         private void recIdentList()
-        {//()* = 0 or more
-            throw new NotImplementedException();
+        {//<IdentList> ::= Identifier ( , Identifier)* ;     //()* = 0 or more
+            mustBe(Token.IdentifierToken);
+            while (have(","))
+            {
+                mustBe(",");
+                mustBe(Token.IdentifierToken);
+            }
         }
     }
 }
