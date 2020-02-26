@@ -32,6 +32,45 @@ namespace CompilersAssesment.PALCompiler
 
         private void recStatement()
         {
+            if (have(Token.IdentifierToken))
+            {//Assignment
+                recAssignment();
+            }
+            else if (have("UNTIL"))
+            {//loop
+                recLoop();
+            }
+            else if (have("IF"))
+            {//condition
+                recConditional();
+            }
+            else if (have("INPUT") || have("OUTPUT"))
+            {//I-O
+                recIO();
+            }
+            else
+            {
+                syntaxError("<Statement>");
+            }
+        }
+
+        private void recIO()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void recConditional()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void recLoop()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void recAssignment()
+        {
             throw new NotImplementedException();
         }
 
@@ -47,7 +86,16 @@ namespace CompilersAssesment.PALCompiler
 
         private void recType()
         {
-            throw new NotImplementedException();
+            if (have(Token.RealToken))
+            {
+                mustBe(Token.RealToken);
+            }
+            else if (have(Token.IntegerToken))
+            {
+                mustBe(Token.IntegerToken);
+            }
+            else
+                syntaxError("<recType>");
         }
 
         private void recIdentList()
