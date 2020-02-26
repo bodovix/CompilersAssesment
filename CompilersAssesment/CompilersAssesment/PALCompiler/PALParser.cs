@@ -132,12 +132,61 @@ namespace CompilersAssesment.PALCompiler
 
         private void recValue()
         {
-            throw new NotImplementedException();
+            if (have(Token.IdentifierToken))
+            {
+                mustBe(Token.IdentifierToken);
+            }
+            else if (have(Token.IntegerToken))
+            {
+                mustBe(Token.IntegerToken);
+            }
+            else if (have(Token.RealToken))
+            {
+                mustBe(Token.RealToken);
+            }
+            else
+                syntaxError("<Value>");
         }
 
         private void recConditional()
+        {//<Conditional> ::= IF <BooleanExpr> THEN (<Statement>)* ( ELSE (<Statement>)* )? ENDIF ;        ()* = 0 or more  | ()? 0 or 1
+            mustBe("IF");
+            recBooleanExpression();
+            mustBe("THEN");
+            while (have(Token.IdentifierToken) || have("UNTIL") || have("IF") || have("INPUT") || have("OUTPUT"))
+            {
+                recStatement();
+            }
+            if (have("ELSE"))
+            {
+                mustBe("ELSE");
+                while (have(Token.IdentifierToken) || have("UNTIL") || have("IF") || have("INPUT") || have("OUTPUT"))
+                {
+                    recStatement();
+                }
+            }
+            else { }//do nothing
+            mustBe("ENDIF");
+        }
+
+        private void recBooleanExpression()
         {
-            throw new NotImplementedException();
+            recExpression();
+            if (have("<"))
+            {
+                mustBe("<");
+            }
+            else if (have("="))
+            {
+                mustBe("=");
+            }
+            else if (have(">"))
+            {
+                mustBe(">");
+            }
+            else
+                syntaxError("<Expression>");
+            recExpression();
         }
 
         private void recLoop()
