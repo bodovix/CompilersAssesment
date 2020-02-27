@@ -220,13 +220,13 @@ namespace CompilersAssesment.PALCompiler
 
         private void recType()
         {
-            if (have(Token.RealToken))
+            if (have("REAL"))
             {
-                mustBe(Token.RealToken);
+                mustBe("REAL");
             }
-            else if (have(Token.IntegerToken))
+            else if (have("INTEGER"))
             {
-                mustBe(Token.IntegerToken);
+                mustBe("INTEGER");
             }
             else
                 syntaxError("<recType>");
