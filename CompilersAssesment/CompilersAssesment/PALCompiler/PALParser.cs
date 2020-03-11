@@ -7,12 +7,12 @@ namespace CompilersAssesment.PALCompiler
 {
     internal class PALParser : RecoveringRdParser
     {
-        private PALScemantics scemantics;
+        private PALScemantics semantics;
 
         public PALParser(IScanner scan) : base(scan)
         {
             scanner = scan;
-            scemantics = new PALScemantics(this);
+            semantics = new PALScemantics(this);
         }
 
         protected override void recStarter()
@@ -31,6 +31,35 @@ namespace CompilersAssesment.PALCompiler
             mustBe("END");
 
             Scope.CloseScope();
+        }
+
+        private void recVarDecls()
+        {//()* = 0 or more
+            List<IToken> tokens = new List<IToken>();
+            while (have(Token.IdentifierToken))
+            {
+                tokens = recIdentList();
+                mustBe("AS");
+                recType();
+                foreach (IToken token in tokens)
+                {
+                    semantics.DeclareId(token);
+                }
+            }
+        }
+
+        private List<IToken> recIdentList()
+        {//<IdentList> ::= Identifier ( , Identifier)* ;     //()* = 0 or more
+            List<IToken> tokens = new List<IToken>();
+            tokens.Add(scanner.CurrentToken);
+            mustBe(Token.IdentifierToken);
+            while (have(","))
+            {
+                mustBe(",");
+                tokens.Add(scanner.CurrentToken);
+                mustBe(Token.IdentifierToken);
+            }
+            return tokens;
         }
 
         private void recStatement()
@@ -206,19 +235,13 @@ namespace CompilersAssesment.PALCompiler
 
         private void recAssignment()
         {
+            IToken currentToken = scanner.CurrentToken;
+            int leftToken = semantics.CheckId(currentToken);
+
             mustBe(Token.IdentifierToken);
             mustBe("=");
-            recExpression();
-        }
-
-        private void recVarDecls()
-        {//()* = 0 or more
-            while (have(Token.IdentifierToken))
-            {
-                recIdentList();
-                mustBe("AS");
-                recType();
-            }
+            int rightToken = recExpression();
+            semantics.checkMatch(currentToken, leftToken, rightToken);
         }
 
         private void recType()
@@ -233,16 +256,6 @@ namespace CompilersAssesment.PALCompiler
             }
             else
                 syntaxError("<recType>");
-        }
-
-        private void recIdentList()
-        {//<IdentList> ::= Identifier ( , Identifier)* ;     //()* = 0 or more
-            mustBe(Token.IdentifierToken);
-            while (have(","))
-            {
-                mustBe(",");
-                mustBe(Token.IdentifierToken);
-            }
         }
     }
 }
