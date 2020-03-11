@@ -7,9 +7,12 @@ namespace CompilersAssesment.PALCompiler
 {
     internal class PALParser : RecoveringRdParser
     {
+        private PALScemantics scemantics;
+
         public PALParser(IScanner scan) : base(scan)
         {
             scanner = scan;
+            scemantics = new PALScemantics(this);
         }
 
         protected override void recStarter()

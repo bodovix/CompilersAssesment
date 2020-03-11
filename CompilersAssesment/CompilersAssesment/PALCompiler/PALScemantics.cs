@@ -13,7 +13,7 @@ namespace CompilersAssesment.PALCompiler
 
         public void DeclareId(IToken id)
         {
-            if (!id.Is(Token.IdentifierToken)) return;  // only proceed if an identifier.
+            if (!id.Is(Token.IdentifierToken)) return;  // only for identifier tokens.
             Scope symbols = Scope.CurrentScope;
             if (symbols.IsDefined(id.TokenValue))
             {
