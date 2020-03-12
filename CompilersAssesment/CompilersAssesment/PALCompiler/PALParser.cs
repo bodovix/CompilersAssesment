@@ -236,12 +236,12 @@ namespace CompilersAssesment.PALCompiler
         private void recAssignment()
         {
             IToken currentToken = scanner.CurrentToken;
-            int leftToken = semantics.CheckId(currentToken);
+            int leftTokenLangType = semantics.CheckId(currentToken);
 
             mustBe(Token.IdentifierToken);
             mustBe("=");
-            int rightToken = recExpression();
-            semantics.checkMatch(currentToken, leftToken, rightToken);
+            int rightTokenLanType = recExpression();
+            semantics.checkMatch(currentToken, leftTokenLangType, rightTokenLanType);
         }
 
         private void recType()
