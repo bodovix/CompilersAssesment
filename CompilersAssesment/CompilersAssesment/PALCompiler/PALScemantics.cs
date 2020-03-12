@@ -11,6 +11,11 @@ namespace CompilersAssesment.PALCompiler
         {
         }
 
+        /// <summary>
+        ///adds the token to the semantic classes list of symbols
+        /// returns Void
+        /// </summary>
+        /// <param name="id"></param>
         public void DeclareId(IToken id)
         {
             if (!id.Is(Token.IdentifierToken)) return;  // only for identifier tokens.
@@ -25,6 +30,12 @@ namespace CompilersAssesment.PALCompiler
             }
         }
 
+        /// <summary>
+        ///checks weather token is defined in Scope
+        ///then returns its language type or creates a NotDeclaredError
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>language type for the token</returns>
         public int CheckId(IToken id)
         {
             if (!Scope.CurrentScope.IsDefined(id.TokenValue))
@@ -35,9 +46,14 @@ namespace CompilersAssesment.PALCompiler
             else return (CheckType(id));
         }
 
-        //--- Check type compatibility of current token.
-        //--- Side-effect: sets current type if it is undefined at present.
-        //--- Must only be called for identifiers that are declared.
+        /// <summary>
+        /// Check type compatibility of current token.
+        /// Side-effect: sets current type if it is undefined at present.
+        /// Must only be called for identifiers that are declared.
+        /// gs: takes in token and returns tokenLanguage type (as integer)
+        /// </summary>
+        /// <param name="token">The token of which to get the language type for</param>
+        /// <returns>Language Type for the token</returns>
         public int CheckType(IToken token)
         {
             int thisType = LanguageType.Undefined;
@@ -69,6 +85,14 @@ namespace CompilersAssesment.PALCompiler
             return thisType;
         }
 
+        /// <summary>
+        ///checks weather or not the TokenLanguage types match.
+        ///used to give more helpful semantic error advice
+        /// </summary>
+        /// <param name="token">the current token</param>
+        /// <param name="leftTokenLangType">The left side of the expression (Language Type)</param>
+        /// <param name="rightTokenLangType">The right side of the expression (Language Type)</param>
+        /// <returns>true or false with a TypeConflictError</returns>
         public bool checkMatch(IToken token, int leftTokenLangType, int rightTokenLangType)
         {
             if (leftTokenLangType != rightTokenLangType)
