@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace CompilersAssesment.PALCompiler
 {
@@ -101,6 +102,39 @@ namespace CompilersAssesment.PALCompiler
                 return false;
             }
             return true;
+        }
+
+        public bool CheckIdentifierMicroSyntax(IToken identifierToken)
+        {
+            if (Regex.IsMatch(identifierToken.TokenValue, @"[a-zA-Z]\w*"))  //TODO: double check that i was right to remove the <| from the beginning of the expression
+                return true;
+            else
+            {
+                semanticError(new SyntaxError());
+                return false;
+            }
+        }
+
+        public bool CheckRealValueMicroSyntax(IToken realToken)
+        {
+            if (Regex.IsMatch(realToken.TokenValue, @"\d+\.\d*"))  //TODO: double check that i was right to remove the <| from the beginning of the expression
+                return true;
+            else
+            {
+                semanticError(new SyntaxError(realToken,));
+                return false;
+            }
+        }
+
+        public bool CheckIntegerValueMicroSyntax(IToken integerToken)
+        {
+            if (Regex.IsMatch(integerToken.TokenValue, @"\d+"))  //TODO: double check that i was right to remove the <| from the beginning of the expression
+                return true;
+            else
+            {
+                semanticError(new SyntaxError());
+                return false;
+            }
         }
     }
 }

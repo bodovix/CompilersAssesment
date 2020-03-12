@@ -110,9 +110,12 @@ namespace CompilersAssesment.PALCompiler
             }
         }
 
-        private void recExpression()
+        private int recExpression()   //not totally sure about the semantics here
         {//<Expression> ::= <Term> ( (+|-) <Term>)* ;   //()* = 0 or more
-            recTerm();
+            IToken currentToken = scanner.CurrentToken;
+            int leftTokenLangType, rightTokenLangType;
+
+            leftTokenLangType = recTerm();
             while (have("+") || have("-"))
             {
                 if (have("+"))
@@ -121,13 +124,23 @@ namespace CompilersAssesment.PALCompiler
                     mustBe("-");
                 else
                     syntaxError("<Expression>"); //shouldn't get hit
-                recTerm();
+                rightTokenLangType = recTerm();
+
+                //all types must be the same in the expression
+                if (semantics.checkMatch(currentToken, leftTokenLangType, rightTokenLangType))
+                    return leftTokenLangType;
+                else
+                    return rightTokenLangType;
             }
+            return leftTokenLangType;//there was no right side so just return the left
         }
 
-        private void recTerm()
+        private int recTerm() //not totally sure about the semantics here
         {//<Term> ::= <Factor> ( (*|/) <Factor>)* ;    //()* = 0 or more
-            recFactor();
+            IToken currentToken = scanner.CurrentToken;
+            int leftTokenLangType, rightTokenLangType;
+
+            leftTokenLangType = recFactor();
             while (have("*") || have("/"))
             {
                 if (have("*"))
@@ -136,12 +149,19 @@ namespace CompilersAssesment.PALCompiler
                     mustBe("/");
                 else
                     syntaxError("<Term>"); //shouldn't get hit
-                recFactor();
+                rightTokenLangType = recFactor();
+                if (semantics.checkMatch(currentToken, leftTokenLangType, rightTokenLangType))
+                    return rightTokenLangType;
+                else
+                    return leftTokenLangType;//semantic error should  have been added by Ardkit?
             }
+            return leftTokenLangType;//there was no right side so just return the left
         }
 
-        private void recFactor()
+        private int recFactor()
         {//<Factor> ::= (+|-)? ( <Value> | "(" <Expression> ")" ) ;
+            int tokenLanguageType;
+
             if (have("+"))
                 mustBe("+");
             else if (have("-"))
@@ -150,19 +170,23 @@ namespace CompilersAssesment.PALCompiler
 
             if (have(Token.IdentifierToken) || have(Token.IntegerToken) || have(Token.RealToken))
             {//Value
-                recValue();
+                tokenLanguageType = recValue();
             }
             else if (have("("))
             {
                 mustBe("(");
-                recExpression();
+                tokenLanguageType = recExpression();
                 mustBe(")");
             }
             else
+            {
                 syntaxError("<Factor>");
+                tokenLanguageType = LanguageType.Undefined;
+            }
+            return tokenLanguageType;
         }
 
-        private void recValue()
+        private int recValue()
         {
             if (have(Token.IdentifierToken))
             {
