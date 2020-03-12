@@ -69,11 +69,11 @@ namespace CompilersAssesment.PALCompiler
             return thisType;
         }
 
-        public bool checkMatch(IToken token, int left, int right)
+        public bool checkMatch(IToken token, int leftTokenLangType, int rightTokenLangType)
         {
-            if (left != right)
+            if (leftTokenLangType != rightTokenLangType)
             {
-                semanticError(new TypeConflictError(token, left, right));
+                semanticError(new TypeConflictError(token, leftTokenLangType, rightTokenLangType));
                 return false;
             }
             return true;
