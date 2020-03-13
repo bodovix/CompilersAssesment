@@ -182,21 +182,27 @@ namespace CompilersAssesment.PALCompiler
         }
 
         private int recValue()
-        {
+        {//<Value> ::= Identifier | IntegerValue | RealValue ;
             if (have(Token.IdentifierToken))
             {
                 mustBe(Token.IdentifierToken);
+                return semantics.CheckId(scanner.CurrentToken);
             }
             else if (have(Token.IntegerToken))
             {
                 mustBe(Token.IntegerToken);
+                return LanguageType.Integer;
             }
             else if (have(Token.RealToken))
             {
                 mustBe(Token.RealToken);
+                return LanguageType.Real;
             }
             else
+            {
                 syntaxError("<Value>");
+                return LanguageType.Undefined;
+            }
         }
 
         private void recConditional()

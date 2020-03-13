@@ -4,4 +4,6 @@ a, b AS INTEGER
 c, d AS REAL
 e AS REAL
 f AS REAL
+IN
+
 END
