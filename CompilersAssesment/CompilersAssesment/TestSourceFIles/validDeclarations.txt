@@ -3,7 +3,13 @@ WITH
 a, b AS INTEGER
 c, d AS REAL
 e AS REAL
-f AS REAL
+f AS INTEGER
 IN
+a = 1
+b = 2
+c = 3.2
+d = 4.6
+e = 15.55
+f = 10
 
 END

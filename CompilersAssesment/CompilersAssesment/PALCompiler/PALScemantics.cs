@@ -17,7 +17,7 @@ namespace CompilersAssesment.PALCompiler
         /// returns Void
         /// </summary>
         /// <param name="tokenToAddtoSymbolsTree"></param>
-        public void DeclareId(IToken tokenToAddtoSymbolsTree)
+        public void DeclareId(IToken tokenToAddtoSymbolsTree, int languageType)
         {
             if (!tokenToAddtoSymbolsTree.Is(Token.IdentifierToken)) return;  // only for identifier tokens.
             Scope symbols = Scope.CurrentScope;
@@ -27,7 +27,7 @@ namespace CompilersAssesment.PALCompiler
             }
             else
             {
-                symbols.Add(new VarSymbol(tokenToAddtoSymbolsTree, currentType));
+                symbols.Add(new VarSymbol(tokenToAddtoSymbolsTree, languageType));// need to set currentType - this replaced
             }
         }
 
@@ -57,33 +57,33 @@ namespace CompilersAssesment.PALCompiler
         /// <returns>Language Type for the token</returns>
         public int CheckType(IToken token)
         {
-            int thisType = LanguageType.Undefined;
+            int thisLanguageType = LanguageType.Undefined;
             if (token.Is(Token.IdentifierToken))
             {
-                thisType = Scope.CurrentScope.Get(token.TokenValue).Type;
-                return thisType;
+                thisLanguageType = Scope.CurrentScope.Get(token.TokenValue).Type;
+                return thisLanguageType;
             }
             else if (token.Is(Token.IntegerToken))
             {
-                thisType = LanguageType.Integer;
-                return thisType;
+                thisLanguageType = LanguageType.Integer;
+                return thisLanguageType;
             }
             else if (token.Is(Token.RealToken))
             {
-                thisType = LanguageType.Real;
-                return thisType;
+                thisLanguageType = LanguageType.Real;
+                return thisLanguageType;
             }
             // if not already set then set the current type being processed.
             if (currentType == LanguageType.Undefined)
             {
-                currentType = thisType;
-                return thisType;
+                currentType = thisLanguageType;
+                return thisLanguageType;
             }
-            if (currentType != thisType)
+            if (currentType != thisLanguageType)
             {
-                semanticError(new TypeConflictError(token, thisType, currentType));
+                semanticError(new TypeConflictError(token, thisLanguageType, currentType));
             }
-            return thisType;
+            return thisLanguageType;
         }
 
         /// <summary>

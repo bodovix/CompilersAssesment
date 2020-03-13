@@ -43,7 +43,7 @@ namespace CompilersAssesment.PALCompiler
                 int type = recType();
                 foreach (IToken token in tokens)
                 {
-                    semantics.DeclareId(token);
+                    semantics.DeclareId(token, type);
                 }
             }
         }
