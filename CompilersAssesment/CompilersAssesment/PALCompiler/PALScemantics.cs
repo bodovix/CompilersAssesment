@@ -16,18 +16,18 @@ namespace CompilersAssesment.PALCompiler
         ///adds the token to the semantic classes list of symbols
         /// returns Void
         /// </summary>
-        /// <param name="id"></param>
-        public void DeclareId(IToken id)
+        /// <param name="tokenToAddtoSymbolsTree"></param>
+        public void DeclareId(IToken tokenToAddtoSymbolsTree)
         {
-            if (!id.Is(Token.IdentifierToken)) return;  // only for identifier tokens.
+            if (!tokenToAddtoSymbolsTree.Is(Token.IdentifierToken)) return;  // only for identifier tokens.
             Scope symbols = Scope.CurrentScope;
-            if (symbols.IsDefined(id.TokenValue))
+            if (symbols.IsDefined(tokenToAddtoSymbolsTree.TokenValue))
             {
-                semanticError(new AlreadyDeclaredError(id, symbols.Get(id.TokenValue)));
+                semanticError(new AlreadyDeclaredError(tokenToAddtoSymbolsTree, symbols.Get(tokenToAddtoSymbolsTree.TokenValue)));
             }
             else
             {
-                symbols.Add(new VarSymbol(id, currentType));
+                symbols.Add(new VarSymbol(tokenToAddtoSymbolsTree, currentType));
             }
         }
 
@@ -35,16 +35,16 @@ namespace CompilersAssesment.PALCompiler
         ///checks weather token is defined in Scope
         ///then returns its language type or creates a NotDeclaredError
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="tokenToCheck"></param>
         /// <returns>language type for the token</returns>
-        public int CheckId(IToken id)
+        public int CheckId(IToken tokenToCheck)
         {
-            if (!Scope.CurrentScope.IsDefined(id.TokenValue))
+            if (!Scope.CurrentScope.IsDefined(tokenToCheck.TokenValue))
             {
-                semanticError(new NotDeclaredError(id));
+                semanticError(new NotDeclaredError(tokenToCheck));
                 return LanguageType.Undefined;
             }
-            else return (CheckType(id));
+            else return (CheckType(tokenToCheck));
         }
 
         /// <summary>
@@ -94,7 +94,7 @@ namespace CompilersAssesment.PALCompiler
         /// <param name="leftTokenLangType">The left side of the expression (Language Type)</param>
         /// <param name="rightTokenLangType">The right side of the expression (Language Type)</param>
         /// <returns>true or false with a TypeConflictError</returns>
-        public bool checkMatch(IToken token, int leftTokenLangType, int rightTokenLangType)
+        public bool CheckMatch(IToken token, int leftTokenLangType, int rightTokenLangType)
         {
             if (leftTokenLangType != rightTokenLangType)
             {

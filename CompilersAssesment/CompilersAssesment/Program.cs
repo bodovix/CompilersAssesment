@@ -24,25 +24,15 @@ namespace CompilersAssesment
             try
             {
                 infile = new StreamReader(args[0]);
-            }
-            catch (IOException e)
-            {
-                PrintReadError("opening", args[0], e);
-                return;
-            }
 
-            //--- Do what you gotta do!
-            PALParser parser = new PALParser(new PALScanner());
+                //--- Do what you gotta do!
+                PALParser parser = new PALParser(new PALScanner());
 
-            parser.Parse(infile);
+                parser.Parse(infile);
 
-            foreach (ICompilerError err in parser.Errors)
-            {
-                Console.WriteLine(err);
-            }
+                foreach (ICompilerError err in parser.Errors)
+                    Console.WriteLine(err);
 
-            try
-            {
                 infile.Close();
             }
             catch (IOException e)

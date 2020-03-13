@@ -127,7 +127,7 @@ namespace CompilersAssesment.PALCompiler
                 rightTokenLangType = recTerm();
 
                 //all types must be the same in the expression
-                if (semantics.checkMatch(currentToken, leftTokenLangType, rightTokenLangType))
+                if (semantics.CheckMatch(currentToken, leftTokenLangType, rightTokenLangType))
                     return leftTokenLangType;
                 else
                     return rightTokenLangType;
@@ -150,7 +150,7 @@ namespace CompilersAssesment.PALCompiler
                 else
                     syntaxError("<Term>"); //shouldn't get hit
                 rightTokenLangType = recFactor();
-                if (semantics.checkMatch(currentToken, leftTokenLangType, rightTokenLangType))
+                if (semantics.CheckMatch(currentToken, leftTokenLangType, rightTokenLangType))
                     return rightTokenLangType;
                 else
                     return leftTokenLangType;//semantic error should  have been added by Ardkit?
@@ -265,7 +265,7 @@ namespace CompilersAssesment.PALCompiler
             mustBe(Token.IdentifierToken);
             mustBe("=");
             int rightTokenLanType = recExpression();
-            semantics.checkMatch(currentToken, leftTokenLangType, rightTokenLanType);
+            semantics.CheckMatch(currentToken, leftTokenLangType, rightTokenLanType);
         }
 
         private void recType()
@@ -273,10 +273,12 @@ namespace CompilersAssesment.PALCompiler
             if (have("REAL"))
             {
                 mustBe("REAL");
+                semantics.CurrentType = LanguageType.Real;
             }
             else if (have("INTEGER"))
             {
                 mustBe("INTEGER");
+                semantics.CurrentType = LanguageType.Integer;
             }
             else
                 syntaxError("<recType>");
