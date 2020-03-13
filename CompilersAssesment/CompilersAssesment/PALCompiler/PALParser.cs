@@ -40,7 +40,7 @@ namespace CompilersAssesment.PALCompiler
             {
                 tokens = recIdentList();
                 mustBe("AS");
-                recType();
+                int type = recType();
                 foreach (IToken token in tokens)
                 {
                     semantics.DeclareId(token);
@@ -127,11 +127,9 @@ namespace CompilersAssesment.PALCompiler
                 rightTokenLangType = recTerm();
 
                 //all types must be the same in the expression
-                if (semantics.CheckMatch(currentToken, leftTokenLangType, rightTokenLangType))
-                    return leftTokenLangType;
-                else
-                    return rightTokenLangType;
+                semantics.CheckMatch(currentToken, leftTokenLangType, rightTokenLangType);
             }
+
             return leftTokenLangType;//there was no right side so just return the left
         }
 
@@ -150,10 +148,7 @@ namespace CompilersAssesment.PALCompiler
                 else
                     syntaxError("<Term>"); //shouldn't get hit
                 rightTokenLangType = recFactor();
-                if (semantics.CheckMatch(currentToken, leftTokenLangType, rightTokenLangType))
-                    return rightTokenLangType;
-                else
-                    return leftTokenLangType;//semantic error should  have been added by Ardkit?
+                semantics.CheckMatch(currentToken, leftTokenLangType, rightTokenLangType);
             }
             return leftTokenLangType;//there was no right side so just return the left
         }
@@ -170,7 +165,7 @@ namespace CompilersAssesment.PALCompiler
 
             if (have(Token.IdentifierToken) || have(Token.IntegerToken) || have(Token.RealToken))
             {//Value
-                tokenLanguageType = recValue();
+                tokenLanguageType = recValue();//TODO: should i update currentTokenLangType here then check them
             }
             else if (have("("))
             {
@@ -268,20 +263,23 @@ namespace CompilersAssesment.PALCompiler
             semantics.CheckMatch(currentToken, leftTokenLangType, rightTokenLanType);
         }
 
-        private void recType()
+        private int recType()
         {
             if (have("REAL"))
             {
                 mustBe("REAL");
-                semantics.CurrentType = LanguageType.Real;
+                return LanguageType.Real;
             }
             else if (have("INTEGER"))
             {
                 mustBe("INTEGER");
-                semantics.CurrentType = LanguageType.Integer;
+                return LanguageType.Integer;
             }
             else
+            {
                 syntaxError("<recType>");
+                return LanguageType.Undefined;
+            }
         }
     }
 }
