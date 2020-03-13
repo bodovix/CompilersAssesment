@@ -1,0 +1,7 @@
+PROGRAM test
+WITH 
+a, b AS INTEGER
+c, d AS REAL
+e AS REAL
+f AS REAL
+END

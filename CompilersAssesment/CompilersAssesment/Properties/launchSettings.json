@@ -2,7 +2,7 @@
   "profiles": {
     "CompilersAssesment": {
       "commandName": "Project",
-      "commandLineArgs": "C:\\Users\\Gwydion\\source\\repos\\UNIVERSITY\\CompilersAssesment\\CompilersAssesment\\CompilersAssesment\\TestSourceFIles\\invalid2.txt"
+      "commandLineArgs": "C:\\Users\\Gwydion\\source\\repos\\UNIVERSITY\\CompilersAssesment\\CompilersAssesment\\CompilersAssesment\\TestSourceFIles\\validDeclarations.txt"
     }
   }
 }
