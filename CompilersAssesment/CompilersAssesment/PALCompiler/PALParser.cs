@@ -91,9 +91,13 @@ namespace CompilersAssesment.PALCompiler
             if (have("INPUT"))
             {
                 mustBe("INPUT");
-                recIdentList();
+                List<IToken> tokensInInput = recIdentList();
+                foreach (IToken token in tokensInInput)
+                {
+                    semantics.CheckId(token); // tokens must already exist in semantics tree - types can vary with input
+                }
             }
-            else if (have("OUTPUT"))
+            else if (have("OUTPUT"))//TODO: NOT SURE IF SEMANTICS NEEDED FOR THIS PART>>> testing to do
             {
                 mustBe("OUTPUT");
                 recExpression();
@@ -110,7 +114,7 @@ namespace CompilersAssesment.PALCompiler
             }
         }
 
-        private int recExpression()   //not totally sure about the semantics here
+        private int recExpression()
         {//<Expression> ::= <Term> ( (+|-) <Term>)* ;   //()* = 0 or more
             IToken currentToken = scanner.CurrentToken;
             int leftTokenLangType, rightTokenLangType;
@@ -130,10 +134,10 @@ namespace CompilersAssesment.PALCompiler
                 semantics.CheckMatch(currentToken, leftTokenLangType, rightTokenLangType);
             }
 
-            return leftTokenLangType;//there was no right side so just return the left
+            return leftTokenLangType;//since types inside the expression match just return the left
         }
 
-        private int recTerm() //not totally sure about the semantics here
+        private int recTerm()
         {//<Term> ::= <Factor> ( (*|/) <Factor>)* ;    //()* = 0 or more
             IToken currentToken = scanner.CurrentToken;
             int leftTokenLangType, rightTokenLangType;
@@ -165,7 +169,7 @@ namespace CompilersAssesment.PALCompiler
 
             if (have(Token.IdentifierToken) || have(Token.IntegerToken) || have(Token.RealToken))
             {//Value
-                tokenLanguageType = recValue();//TODO: should i update currentTokenLangType here then check them
+                tokenLanguageType = recValue();
             }
             else if (have("("))
             {

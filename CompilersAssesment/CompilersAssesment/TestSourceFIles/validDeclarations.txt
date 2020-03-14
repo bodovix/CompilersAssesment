@@ -22,4 +22,7 @@ UNTIL a > 10
 REPEAT a = a * 2
 ENDLOOP
 
+INPUT a,b
+OUTPUT c + 1.0, d / 5.0
+
 END
