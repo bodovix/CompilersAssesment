@@ -76,11 +76,14 @@ namespace CompilersAssesment.PALCompiler
             // if not already set then set the current type being processed.
             if (currentType == LanguageType.Undefined)
             {
+                throw new Exception("shouldn't be needing to do anything with currentType (i think) : GS");
+
                 currentType = thisLanguageType;
                 return thisLanguageType;
             }
             if (currentType != thisLanguageType)
             {
+                throw new Exception("shouldn't be needing to do anything with currentType (i think): GS");
                 semanticError(new TypeConflictError(token, thisLanguageType, currentType));
             }
             return thisLanguageType;

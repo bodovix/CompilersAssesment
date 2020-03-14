@@ -37,15 +37,9 @@ namespace CompilersAssesment
             }
             catch (IOException e)
             {
-                PrintReadError("closing", args[0], e);
+                Console.WriteLine(e.Message);
                 return;
             }
-        }
-
-        private static void PrintReadError(String function, String filename, IOException e)
-        {
-            Console.WriteLine("Source File OI error {0} file {1}.", function, filename);
-            Console.WriteLine(e);
         }
     }
 
