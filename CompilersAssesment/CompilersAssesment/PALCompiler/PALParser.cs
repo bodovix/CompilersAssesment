@@ -5,7 +5,7 @@ using System.Text;
 
 namespace CompilersAssesment.PALCompiler
 {
-    internal class PALParser : RecoveringRdParser
+    public class PALParser : RecoveringRdParser
     {
         private PALScemantics semantics;
 
