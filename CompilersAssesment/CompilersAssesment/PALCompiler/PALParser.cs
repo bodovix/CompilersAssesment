@@ -22,25 +22,25 @@ namespace CompilersAssesment.PALCompiler
             mustBe("PROGRAM");
             mustBe(Token.IdentifierToken);
             mustBe("WITH");
-            recVarDecls();
+            RecVarDecls();
             mustBe("IN");
             do
             {
-                recStatement();   // MIGHT NEED TO LOOP THIS ( ()+ so one or more) - recursively call itself
+                RecStatement();   // MIGHT NEED TO LOOP THIS ( ()+ so one or more) - recursively call itself
             } while (have(Token.IdentifierToken) || have("UNTIL") || have("IF") || have("INPUT") || have("OUTPUT")); // while has tokens for terminal operators for this
             mustBe("END");
 
             Scope.CloseScope();
         }
 
-        private void recVarDecls()
+        private void RecVarDecls()
         {//()* = 0 or more
             List<IToken> tokens = new List<IToken>();
             while (have(Token.IdentifierToken))
             {
-                tokens = recIdentList();
+                tokens = RecIdentList();
                 mustBe("AS");
-                int type = recType();
+                int type = RecType();
                 foreach (IToken token in tokens)
                 {
                     semantics.DeclareId(token, type);
@@ -48,7 +48,7 @@ namespace CompilersAssesment.PALCompiler
             }
         }
 
-        private List<IToken> recIdentList()
+        private List<IToken> RecIdentList()
         {//<IdentList> ::= Identifier ( , Identifier)* ;     //()* = 0 or more
             List<IToken> tokens = new List<IToken>();
             tokens.Add(scanner.CurrentToken);
@@ -62,23 +62,23 @@ namespace CompilersAssesment.PALCompiler
             return tokens;
         }
 
-        private void recStatement()
+        private void RecStatement()
         {
             if (have(Token.IdentifierToken))
             {//Assignment
-                recAssignment();// think semantics for this is done
+                RecAssignment();// think semantics for this is done
             }
             else if (have("UNTIL"))
             {//loop
-                recLoop();
+                RecLoop();
             }
             else if (have("IF"))
             {//condition
-                recConditional();// this semantics for this are done
+                RecConditional();// this semantics for this are done
             }
             else if (have("INPUT") || have("OUTPUT"))
             {//I-O
-                recIO();
+                RecIO();
             }
             else
             {
@@ -86,12 +86,12 @@ namespace CompilersAssesment.PALCompiler
             }
         }
 
-        private void recIO()
+        private void RecIO()
         {
             if (have("INPUT"))
             {
                 mustBe("INPUT");
-                List<IToken> tokensInInput = recIdentList();
+                List<IToken> tokensInInput = RecIdentList();
                 foreach (IToken token in tokensInInput)
                 {
                     semantics.CheckId(token); // tokens must already exist in semantics tree - types can vary with input
@@ -100,12 +100,12 @@ namespace CompilersAssesment.PALCompiler
             else if (have("OUTPUT"))//TODO: NOT SURE IF SEMANTICS NEEDED FOR THIS PART>>> testing to do
             {
                 mustBe("OUTPUT");
-                recExpression();
+                RecExpression();
                 //( , <Expression>)* = 0 or more
                 while (have(","))
                 {
                     mustBe(",");
-                    recExpression();
+                    RecExpression();
                 }
             }
             else
@@ -114,12 +114,12 @@ namespace CompilersAssesment.PALCompiler
             }
         }
 
-        private int recExpression()
+        private int RecExpression()
         {//<Expression> ::= <Term> ( (+|-) <Term>)* ;   //()* = 0 or more
             IToken currentToken = scanner.CurrentToken;
             int leftTokenLangType, rightTokenLangType;
 
-            leftTokenLangType = recTerm();
+            leftTokenLangType = RecTerm();
             while (have("+") || have("-"))
             {
                 if (have("+"))
@@ -128,7 +128,7 @@ namespace CompilersAssesment.PALCompiler
                     mustBe("-");
                 else
                     syntaxError("<Expression>"); //shouldn't get hit
-                rightTokenLangType = recTerm();
+                rightTokenLangType = RecTerm();
 
                 //all types must be the same in the expression
                 semantics.CheckMatch(currentToken, leftTokenLangType, rightTokenLangType);
@@ -137,12 +137,12 @@ namespace CompilersAssesment.PALCompiler
             return leftTokenLangType;//since types inside the expression match just return the left
         }
 
-        private int recTerm()
+        private int RecTerm()
         {//<Term> ::= <Factor> ( (*|/) <Factor>)* ;    //()* = 0 or more
             IToken currentToken = scanner.CurrentToken;
             int leftTokenLangType, rightTokenLangType;
 
-            leftTokenLangType = recFactor();
+            leftTokenLangType = RecFactor();
             while (have("*") || have("/"))
             {
                 if (have("*"))
@@ -151,13 +151,13 @@ namespace CompilersAssesment.PALCompiler
                     mustBe("/");
                 else
                     syntaxError("<Term>"); //shouldn't get hit
-                rightTokenLangType = recFactor();
+                rightTokenLangType = RecFactor();
                 semantics.CheckMatch(currentToken, leftTokenLangType, rightTokenLangType);
             }
             return leftTokenLangType;//there was no right side so just return the left
         }
 
-        private int recFactor()
+        private int RecFactor()
         {//<Factor> ::= (+|-)? ( <Value> | "(" <Expression> ")" ) ;
             int tokenLanguageType;
 
@@ -169,12 +169,12 @@ namespace CompilersAssesment.PALCompiler
 
             if (have(Token.IdentifierToken) || have(Token.IntegerToken) || have(Token.RealToken))
             {//Value
-                tokenLanguageType = recValue();
+                tokenLanguageType = RecValue();
             }
             else if (have("("))
             {
                 mustBe("(");
-                tokenLanguageType = recExpression();
+                tokenLanguageType = RecExpression();
                 mustBe(")");
             }
             else
@@ -185,7 +185,7 @@ namespace CompilersAssesment.PALCompiler
             return tokenLanguageType;
         }
 
-        private int recValue()
+        private int RecValue()
         {//<Value> ::= Identifier | IntegerValue | RealValue ;
             if (have(Token.IdentifierToken))
             {
@@ -210,31 +210,31 @@ namespace CompilersAssesment.PALCompiler
             }
         }
 
-        private void recConditional()
+        private void RecConditional()
         {//<Conditional> ::= IF <BooleanExpr> THEN (<Statement>)* ( ELSE (<Statement>)* )? ENDIF ;        ()* = 0 or more  | ()? 0 or 1
             mustBe("IF");
-            recBooleanExpression();
+            RecBooleanExpression();
             mustBe("THEN");
             while (have(Token.IdentifierToken) || have("UNTIL") || have("IF") || have("INPUT") || have("OUTPUT"))
             {
-                recStatement();
+                RecStatement();
             }
             if (have("ELSE"))
             {
                 mustBe("ELSE");
                 while (have(Token.IdentifierToken) || have("UNTIL") || have("IF") || have("INPUT") || have("OUTPUT"))
                 {
-                    recStatement();
+                    RecStatement();
                 }
             }
             else { }//do nothing
             mustBe("ENDIF");
         }
 
-        private void recBooleanExpression()
+        private void RecBooleanExpression()
         {
             IToken startingToken = scanner.CurrentToken;
-            int leftTokenLanguageType = recExpression();
+            int leftTokenLanguageType = RecExpression();
             if (have("<"))
             {
                 mustBe("<");
@@ -249,34 +249,34 @@ namespace CompilersAssesment.PALCompiler
             }
             else
                 syntaxError("<Expression>");
-            int rightTokenLanguagType = recExpression();
+            int rightTokenLanguagType = RecExpression();
             semantics.CheckMatch(startingToken, leftTokenLanguageType, rightTokenLanguagType);
         }
 
-        private void recLoop()
+        private void RecLoop()
         {//<Loop> ::= UNTIL <BooleanExpr> REPEAT (<Statement>)* ENDLOOP ;           //()* = 0 or more
             mustBe("UNTIL");
-            recBooleanExpression();
+            RecBooleanExpression();
             mustBe("REPEAT");
             while (have(Token.IdentifierToken) || have("UNTIL") || have("IF") || have("INPUT") || have("OUTPUT"))
             {
-                recStatement();
+                RecStatement();
             }
             mustBe("ENDLOOP");
         }
 
-        private void recAssignment()
+        private void RecAssignment()
         {
             IToken currentToken = scanner.CurrentToken;
             int leftTokenLangType = semantics.CheckId(currentToken);
 
             mustBe(Token.IdentifierToken);
             mustBe("=");
-            int rightTokenLanType = recExpression();
+            int rightTokenLanType = RecExpression();
             semantics.CheckMatch(currentToken, leftTokenLangType, rightTokenLanType);
         }
 
-        private int recType()
+        private int RecType()
         {
             if (have("REAL"))
             {
