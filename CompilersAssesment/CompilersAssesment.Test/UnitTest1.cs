@@ -100,7 +100,31 @@ namespace CompilersAssesment.Test
             run.Execute(SourceFolder + @"invalid2.txt");
             PrintErrorsFromRun(run);
             //Assert
-            Assert.AreEqual(0, run.ErrorsForTests.Count);
+            Assert.AreEqual(5, run.ErrorsForTests.Count);
+        }
+
+        [TestMethod]
+        public void Invalid_RealAssignedToIngeger_Fail()
+        {
+            //Arrange
+            RunCompiler run = new RunCompiler();
+            //Act
+            run.Execute(SourceFolder + @"Invalid_RealAssignedToIngeger.txt");
+            PrintErrorsFromRun(run);
+            //Assert
+            Assert.AreEqual(1, run.ErrorsForTests.Count);
+        }
+
+        [TestMethod]
+        public void Invalid_Invalid_IntAssignedToReal_Fail()
+        {
+            //Arrange
+            RunCompiler run = new RunCompiler();
+            //Act
+            run.Execute(SourceFolder + @"Invalid_IntAssignedToReal.txt");
+            PrintErrorsFromRun(run);
+            //Assert
+            Assert.AreEqual(1, run.ErrorsForTests.Count);
         }
 
         [TestMethod]
