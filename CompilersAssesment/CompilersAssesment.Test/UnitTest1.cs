@@ -44,6 +44,54 @@ namespace CompilersAssesment.Test
         }
 
         [TestMethod]
+        public void GwydTestFile_Invalid_AlreadyDeclared_Int_Invalid()
+        {
+            //Arrange
+            RunCompiler run = new RunCompiler();
+            //Act
+            run.Execute(SourceFolder + @"Invalid_AlreadyDeclared_Int.txt");
+            PrintErrorsFromRun(run);
+            //Assert
+            Assert.AreEqual(1, run.ErrorsForTests.Count);
+        }
+
+        [TestMethod]
+        public void GwydTestFile_Invalid_AlreadyDeclared_IntInline_Invalid()
+        {
+            //Arrange
+            RunCompiler run = new RunCompiler();
+            //Act
+            run.Execute(SourceFolder + @"Invalid_AlreadyDeclared_IntInline.txt");
+            PrintErrorsFromRun(run);
+            //Assert
+            Assert.AreEqual(1, run.ErrorsForTests.Count);
+        }
+
+        [TestMethod]
+        public void GwydTestFile_Invalid_AlreadyDeclared_Real_Invalid()
+        {
+            //Arrange
+            RunCompiler run = new RunCompiler();
+            //Act
+            run.Execute(SourceFolder + @"Invalid_AlreadyDeclared_Real.txt");
+            PrintErrorsFromRun(run);
+            //Assert
+            Assert.AreEqual(1, run.ErrorsForTests.Count);
+        }
+
+        [TestMethod]
+        public void GwydTestFile_Invalid_AlreadyDeclared_RealInline_Invalid()
+        {
+            //Arrange
+            RunCompiler run = new RunCompiler();
+            //Act
+            run.Execute(SourceFolder + @"Invalid_AlreadyDeclared_RealInline.txt");
+            PrintErrorsFromRun(run);
+            //Assert
+            Assert.AreEqual(1, run.ErrorsForTests.Count);
+        }
+
+        [TestMethod]
         public void Invalid2_Success()
         {
             //Arrange
@@ -62,6 +110,17 @@ namespace CompilersAssesment.Test
             RunCompiler run = new RunCompiler();
             //Act
             run.Execute(SourceFolder + @"valid1.txt");
+            //Assert
+            Assert.AreEqual(0, run.ErrorsForTests.Count);
+        }
+
+        [TestMethod]
+        public void Valid1_NoWhitespaceForNonKeywords_Success()
+        {
+            //Arrange
+            RunCompiler run = new RunCompiler();
+            //Act
+            run.Execute(SourceFolder + @"valid1_NoWhitespaceForNonKeywords.txt");
             //Assert
             Assert.AreEqual(0, run.ErrorsForTests.Count);
         }
