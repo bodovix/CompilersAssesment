@@ -1,7 +1,6 @@
 PROGRAM test
 WITH 
-a, b AS INTEGER
-a AS INTEGER
+a, b, a AS INTEGER
 c, d AS REAL
 IN
 a = 1
