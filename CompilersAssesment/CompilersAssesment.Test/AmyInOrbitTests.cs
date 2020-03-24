@@ -9,11 +9,13 @@ namespace CompilersAssesment.Test
     {
         public string SourceFolder { get; set; }
         public string SemanticErrors { get; set; }
+        public string SyntaxErrors { get; set; }
 
         public AmyInOrbitTests()
         {
             SourceFolder = @"C:\Users\Gwydion\source\repos\UNIVERSITY\CompilersAssesment\CompilersAssesment\CompilersAssesment\TestSourceFIles\";
             SemanticErrors = @"GithubPpl\Amyinorbit\semantic-errors\";
+            SyntaxErrors = @"GithubPpl\Amyinorbit\syntax-errors\";
         }
 
         private static void PrintErrorsFromRun(RunCompiler run)
@@ -84,8 +86,182 @@ namespace CompilersAssesment.Test
         #region Syntax Errors
 
         [TestMethod]
-        public void
+        public void BadAssignment_Fail()
+        {
+            //Arrange
+            RunCompiler run = new RunCompiler();
+            //Act
+            run.Execute(SourceFolder + SyntaxErrors + @"TODOCOPYNAMEHERE.txt");
+            //Assert
+            Assert.AreEqual(0, run.ErrorsForTests.Count);
+        }
 
-        #endregion Syntax Errors
+        [TestMethod]
+        public void InvalidChar_Fail()
+        {
+            //Arrange
+            RunCompiler run = new RunCompiler();
+            //Act
+            run.Execute(SourceFolder + SyntaxErrors + @"TODOCOPYNAMEHERE.txt");
+            //Assert
+            Assert.AreEqual(0, run.ErrorsForTests.Count);
+        }
+
+        [TestMethod]
+        public void InvalidIdent_Fail()
+        {
+            //Arrange
+            RunCompiler run = new RunCompiler();
+            //Act
+            run.Execute(SourceFolder + SyntaxErrors + @"TODOCOPYNAMEHERE.txt");
+            //Assert
+            Assert.AreEqual(0, run.ErrorsForTests.Count);
+        }
+
+        [TestMethod]
+        public void MissingDeclarationComma_Fail()
+        {
+            //Arrange
+            RunCompiler run = new RunCompiler();
+            //Act
+            run.Execute(SourceFolder + SyntaxErrors + @"TODOCOPYNAMEHERE.txt");
+            //Assert
+            Assert.AreEqual(0, run.ErrorsForTests.Count);
+        }
+
+        [TestMethod]
+        public void MissingEnd_Fail()
+        {
+            //Arrange
+            RunCompiler run = new RunCompiler();
+            //Act
+            run.Execute(SourceFolder + SyntaxErrors + @"TODOCOPYNAMEHERE.txt");
+            //Assert
+            Assert.AreEqual(0, run.ErrorsForTests.Count);
+        }
+
+        [TestMethod]
+        public void MissingProgramIdent_Fail()
+        {
+            //Arrange
+            RunCompiler run = new RunCompiler();
+            //Act
+            run.Execute(SourceFolder + SyntaxErrors + @"TODOCOPYNAMEHERE.txt");
+            //Assert
+            Assert.AreEqual(0, run.ErrorsForTests.Count);
+        }
+
+        [TestMethod]
+        public void MissingStatements_Fail()
+        {
+            //Arrange
+            RunCompiler run = new RunCompiler();
+            //Act
+            run.Execute(SourceFolder + SyntaxErrors + @"TODOCOPYNAMEHERE.txt");
+            //Assert
+            Assert.AreEqual(0, run.ErrorsForTests.Count);
+        }
+
+        [TestMethod]
+        public void NoBooleanConditional_Fail()
+        {
+            //Arrange
+            RunCompiler run = new RunCompiler();
+            //Act
+            run.Execute(SourceFolder + SyntaxErrors + @"TODOCOPYNAMEHERE.txt");
+            //Assert
+            Assert.AreEqual(0, run.ErrorsForTests.Count);
+        }
+
+        [TestMethod]
+        public void NonExistentType_Fail()
+        {
+            //Arrange
+            RunCompiler run = new RunCompiler();
+            //Act
+            run.Execute(SourceFolder + SyntaxErrors + @"TODOCOPYNAMEHERE.txt");
+            //Assert
+            Assert.AreEqual(0, run.ErrorsForTests.Count);
+        }
+
+        [TestMethod]
+        public void NoProgramName_Fail()
+        {
+            //Arrange
+            RunCompiler run = new RunCompiler();
+            //Act
+            run.Execute(SourceFolder + SyntaxErrors + @"TODOCOPYNAMEHERE.txt");
+            //Assert
+            Assert.AreEqual(0, run.ErrorsForTests.Count);
+        }
+
+        [TestMethod]
+        public void NoProgram_Fail()
+        {
+            //Arrange
+            RunCompiler run = new RunCompiler();
+            //Act
+            run.Execute(SourceFolder + SyntaxErrors + @"TODOCOPYNAMEHERE.txt");
+            //Assert
+            Assert.AreEqual(0, run.ErrorsForTests.Count);
+        }
+
+        [TestMethod]
+        public void NoTypeDeclaration_Fail()
+        {
+            //Arrange
+            RunCompiler run = new RunCompiler();
+            //Act
+            run.Execute(SourceFolder + SyntaxErrors + @"TODOCOPYNAMEHERE.txt");
+            //Assert
+            Assert.AreEqual(0, run.ErrorsForTests.Count);
+        }
+
+        [TestMethod]
+        public void NoVariables_Success()
+        {
+            //Arrange
+            RunCompiler run = new RunCompiler();
+            //Act
+            run.Execute(SourceFolder + SyntaxErrors + @"TODOCOPYNAMEHERE.txt");
+            //Assert
+            Assert.AreEqual(0, run.ErrorsForTests.Count);
+        }
+
+        [TestMethod]
+        public void ValueAssignment_Fail()
+        {
+            //Arrange
+            RunCompiler run = new RunCompiler();
+            //Act
+            run.Execute(SourceFolder + SyntaxErrors + @"TODOCOPYNAMEHERE.txt");
+            //Assert
+            Assert.AreEqual(0, run.ErrorsForTests.Count);
+        }
+
+        [TestMethod]
+        public void StatementAfterProgram_Fail()
+        {
+            //Arrange
+            RunCompiler run = new RunCompiler();
+            //Act
+            run.Execute(SourceFolder + SyntaxErrors + @"TODOCOPYNAMEHERE.txt");
+            //Assert
+            Assert.AreEqual(0, run.ErrorsForTests.Count);
+        }
+
+        [TestMethod]
+        public void TrailingDeclarationComma_Fail()
+        {
+            //Arrange
+            RunCompiler run = new RunCompiler();
+            //Act
+            run.Execute(SourceFolder + SyntaxErrors + @"TODOCOPYNAMEHERE.txt");
+            //Assert
+            Assert.AreEqual(0, run.ErrorsForTests.Count);
+        }
     }
+
+    #endregion Syntax Errors
+}
 }
