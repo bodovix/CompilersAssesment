@@ -4,6 +4,7 @@ WITH
     k AS INTEGER
 IN
     INPUT i, j
+    OUTPUT k, k
     OUTPUT i * 2
     OUTPUT i * k
     OUTPUT i * (k * 2 + 3)
