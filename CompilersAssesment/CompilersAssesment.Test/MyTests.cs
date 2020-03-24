@@ -5,11 +5,11 @@ using System.Diagnostics;
 namespace CompilersAssesment.Test
 {
     [TestClass]
-    public class UnitTest1
+    public class MyTests
     {
         public string SourceFolder { get; set; }
 
-        public UnitTest1()
+        public MyTests()
         {
             SourceFolder = @"C:\Users\Gwydion\source\repos\UNIVERSITY\CompilersAssesment\CompilersAssesment\CompilersAssesment\TestSourceFIles\";
         }
