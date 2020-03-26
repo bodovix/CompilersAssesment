@@ -99,9 +99,11 @@ namespace CompilersAssesment.PALCompiler
         /// <returns>true or false with a TypeConflictError</returns>
         public bool CheckMatch(IToken token, int leftTokenLangType, int rightTokenLangType)
         {
+            if (leftTokenLangType == LanguageType.Undefined)
+                return false;
             if (leftTokenLangType != rightTokenLangType)
             {
-                semanticError(new TypeConflictError(token, leftTokenLangType, rightTokenLangType));
+                semanticError(new TypeConflictError(token, rightTokenLangType, leftTokenLangType));
                 return false;
             }
             return true;

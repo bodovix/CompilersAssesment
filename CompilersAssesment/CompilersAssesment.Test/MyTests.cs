@@ -40,7 +40,7 @@ namespace CompilersAssesment.Test
             run.Execute(SourceFolder + @"GwydInvalid_NotDeclared.txt");
             PrintErrorsFromRun(run);
             //Assert
-            Assert.AreEqual(3, run.ErrorsForTests.Count);
+            Assert.AreEqual(2, run.ErrorsForTests.Count);
         }
 
         [TestMethod]

@@ -69,7 +69,7 @@ namespace CompilersAssesment.Test
             //Act
             run.Execute(SourceFolder + SemanticErrors + @"undeclaredVariable.txt");
             //Assert
-            Assert.AreEqual(4, run.ErrorsForTests.Count);
+            Assert.AreEqual(2, run.ErrorsForTests.Count);
         }
 
         [TestMethod]
@@ -128,7 +128,7 @@ namespace CompilersAssesment.Test
             //Act
             run.Execute(SourceFolder + SyntaxErrors + @"missingDeclarationComma.txt");
             //Assert
-            Assert.AreEqual(4, run.ErrorsForTests.Count);
+            Assert.AreEqual(3, run.ErrorsForTests.Count);
         }
 
         [TestMethod]
@@ -183,7 +183,7 @@ namespace CompilersAssesment.Test
             //Act
             run.Execute(SourceFolder + SyntaxErrors + @"nonexistentType.txt");
             //Assert
-            Assert.AreEqual(3, run.ErrorsForTests.Count);
+            Assert.AreEqual(2, run.ErrorsForTests.Count);
         }
 
         [TestMethod]
@@ -216,7 +216,7 @@ namespace CompilersAssesment.Test
             //Act
             run.Execute(SourceFolder + SyntaxErrors + @"noTypeDeclaration.txt");
             //Assert
-            Assert.AreEqual(2, run.ErrorsForTests.Count);
+            Assert.AreEqual(1, run.ErrorsForTests.Count);
         }
 
         [TestMethod]
