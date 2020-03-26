@@ -67,7 +67,7 @@ namespace CompilersAssesment.Test
             //Act
             run.Execute(SourceFolder + SemanticErrors + @"undeclaredVariable.txt");
             //Assert
-            Assert.AreEqual(0, run.ErrorsForTests.Count); //TODO:Waiting on reply back from Adam about this one 4 or 2
+            Assert.AreEqual(4, run.ErrorsForTests.Count);
         }
 
         [TestMethod]
@@ -104,7 +104,7 @@ namespace CompilersAssesment.Test
             //Act
             run.Execute(SourceFolder + SyntaxErrors + @"invalidchar.pal.txt");
             //Assert
-            Assert.AreEqual(0, run.ErrorsForTests.Count);
+            Assert.AreEqual(3, run.ErrorsForTests.Count);
         }
 
         [TestMethod]
@@ -113,9 +113,9 @@ namespace CompilersAssesment.Test
             //Arrange
             RunCompiler run = new RunCompiler();
             //Act
-            run.Execute(SourceFolder + SyntaxErrors + @"TODOCOPYNAMEHERE.txt");
+            run.Execute(SourceFolder + SyntaxErrors + @"invalidident.pal.txt");
             //Assert
-            Assert.AreEqual(0, run.ErrorsForTests.Count);
+            Assert.AreEqual(2, run.ErrorsForTests.Count);
         }
 
         [TestMethod]
@@ -124,9 +124,9 @@ namespace CompilersAssesment.Test
             //Arrange
             RunCompiler run = new RunCompiler();
             //Act
-            run.Execute(SourceFolder + SyntaxErrors + @"TODOCOPYNAMEHERE.txt");
+            run.Execute(SourceFolder + SyntaxErrors + @"missingDeclarationComma.txt");
             //Assert
-            Assert.AreEqual(0, run.ErrorsForTests.Count);
+            Assert.AreEqual(4, run.ErrorsForTests.Count);
         }
 
         [TestMethod]
@@ -135,9 +135,9 @@ namespace CompilersAssesment.Test
             //Arrange
             RunCompiler run = new RunCompiler();
             //Act
-            run.Execute(SourceFolder + SyntaxErrors + @"TODOCOPYNAMEHERE.txt");
+            run.Execute(SourceFolder + SyntaxErrors + @"missingEND.txt");
             //Assert
-            Assert.AreEqual(0, run.ErrorsForTests.Count);
+            Assert.AreEqual(1, run.ErrorsForTests.Count);
         }
 
         [TestMethod]
@@ -146,9 +146,9 @@ namespace CompilersAssesment.Test
             //Arrange
             RunCompiler run = new RunCompiler();
             //Act
-            run.Execute(SourceFolder + SyntaxErrors + @"TODOCOPYNAMEHERE.txt");
+            run.Execute(SourceFolder + SyntaxErrors + @"missingProgramIdent.txt");
             //Assert
-            Assert.AreEqual(0, run.ErrorsForTests.Count);
+            Assert.AreEqual(1, run.ErrorsForTests.Count);
         }
 
         [TestMethod]
@@ -157,9 +157,9 @@ namespace CompilersAssesment.Test
             //Arrange
             RunCompiler run = new RunCompiler();
             //Act
-            run.Execute(SourceFolder + SyntaxErrors + @"TODOCOPYNAMEHERE.txt");
+            run.Execute(SourceFolder + SyntaxErrors + @"missingStatements.txt");
             //Assert
-            Assert.AreEqual(0, run.ErrorsForTests.Count);
+            Assert.AreEqual(1, run.ErrorsForTests.Count);
         }
 
         [TestMethod]
@@ -168,9 +168,9 @@ namespace CompilersAssesment.Test
             //Arrange
             RunCompiler run = new RunCompiler();
             //Act
-            run.Execute(SourceFolder + SyntaxErrors + @"TODOCOPYNAMEHERE.txt");
+            run.Execute(SourceFolder + SyntaxErrors + @"nonBooleanConditional.txt");
             //Assert
-            Assert.AreEqual(0, run.ErrorsForTests.Count);
+            Assert.AreEqual(1, run.ErrorsForTests.Count);
         }
 
         [TestMethod]
@@ -179,9 +179,9 @@ namespace CompilersAssesment.Test
             //Arrange
             RunCompiler run = new RunCompiler();
             //Act
-            run.Execute(SourceFolder + SyntaxErrors + @"TODOCOPYNAMEHERE.txt");
+            run.Execute(SourceFolder + SyntaxErrors + @"nonexistentType.txt");
             //Assert
-            Assert.AreEqual(0, run.ErrorsForTests.Count);
+            Assert.AreEqual(3, run.ErrorsForTests.Count);
         }
 
         [TestMethod]

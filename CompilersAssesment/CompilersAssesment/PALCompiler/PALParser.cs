@@ -89,7 +89,7 @@ namespace CompilersAssesment.PALCompiler
 
         private void RecIO()
         {
-            if (have("INPUT"))
+            if (have("PUT"))
             {
                 mustBe("INPUT");
                 List<IToken> tokensInInput = RecIdentList();
@@ -249,7 +249,10 @@ namespace CompilersAssesment.PALCompiler
                 mustBe(">");
             }
             else
+            {
                 syntaxError("<Expression>");
+                return;
+            }
             int rightTokenLanguagType = RecExpression();
             semantics.CheckMatch(startingToken, leftTokenLanguageType, rightTokenLanguagType);
         }
