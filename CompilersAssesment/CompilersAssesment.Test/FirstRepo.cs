@@ -5,14 +5,14 @@ using System.Diagnostics;
 namespace CompilersAssesment.Test
 {
     [TestClass]
-    public class AmyInOrbitTests
+    public class FirstRepo
     {
         public string SourceFolder { get; set; }
         public string SemanticErrors { get; set; }
         public string SyntaxErrors { get; set; }
         public string ValidSource { get; private set; }
 
-        public AmyInOrbitTests()
+        public FirstRepo()
         {
             SourceFolder = @"C:\Users\Gwydion\source\repos\UNIVERSITY\CompilersAssesment\CompilersAssesment\CompilersAssesment\TestSourceFIles\";
             SemanticErrors = @"GithubPpl\first\semantic-errors\";
