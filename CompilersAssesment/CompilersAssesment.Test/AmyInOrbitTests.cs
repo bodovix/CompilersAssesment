@@ -91,9 +91,9 @@ namespace CompilersAssesment.Test
             //Arrange
             RunCompiler run = new RunCompiler();
             //Act
-            run.Execute(SourceFolder + SyntaxErrors + @"TODOCOPYNAMEHERE.txt");
+            run.Execute(SourceFolder + SyntaxErrors + @"badAssignment.txt");
             //Assert
-            Assert.AreEqual(0, run.ErrorsForTests.Count);
+            Assert.AreEqual(3, run.ErrorsForTests.Count);
         }
 
         [TestMethod]
@@ -102,7 +102,7 @@ namespace CompilersAssesment.Test
             //Arrange
             RunCompiler run = new RunCompiler();
             //Act
-            run.Execute(SourceFolder + SyntaxErrors + @"TODOCOPYNAMEHERE.txt");
+            run.Execute(SourceFolder + SyntaxErrors + @"invalidchar.pal.txt");
             //Assert
             Assert.AreEqual(0, run.ErrorsForTests.Count);
         }
@@ -263,5 +263,4 @@ namespace CompilersAssesment.Test
     }
 
     #endregion Syntax Errors
-}
 }

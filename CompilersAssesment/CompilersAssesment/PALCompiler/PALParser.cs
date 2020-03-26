@@ -20,6 +20,7 @@ namespace CompilersAssesment.PALCompiler
             Scope.OpenScope();
 
             mustBe("PROGRAM");
+            //program name identifier has no semantic value (ignore it)
             mustBe(Token.IdentifierToken);
             mustBe("WITH");
             RecVarDecls();

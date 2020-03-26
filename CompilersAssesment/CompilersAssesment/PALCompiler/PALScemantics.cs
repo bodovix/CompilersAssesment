@@ -94,8 +94,8 @@ namespace CompilersAssesment.PALCompiler
         ///used to give more helpful semantic error advice
         /// </summary>
         /// <param name="token">the current token</param>
-        /// <param name="leftTokenLangType">The left side of the expression (Language Type)</param>
-        /// <param name="rightTokenLangType">The right side of the expression (Language Type)</param>
+        /// <param name="leftTokenLangType">The left side of the expression (Language Type) Found</param>
+        /// <param name="rightTokenLangType">The right side of the expression (Language Type) Expected</param>
         /// <returns>true or false with a TypeConflictError</returns>
         public bool CheckMatch(IToken token, int leftTokenLangType, int rightTokenLangType)
         {
