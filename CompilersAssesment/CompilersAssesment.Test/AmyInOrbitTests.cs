@@ -10,12 +10,14 @@ namespace CompilersAssesment.Test
         public string SourceFolder { get; set; }
         public string SemanticErrors { get; set; }
         public string SyntaxErrors { get; set; }
+        public string ValidSource { get; private set; }
 
         public AmyInOrbitTests()
         {
             SourceFolder = @"C:\Users\Gwydion\source\repos\UNIVERSITY\CompilersAssesment\CompilersAssesment\CompilersAssesment\TestSourceFIles\";
             SemanticErrors = @"GithubPpl\Amyinorbit\semantic-errors\";
             SyntaxErrors = @"GithubPpl\Amyinorbit\syntax-errors\";
+            ValidSource = @"GithubPpl\Amyinorbit\valid\";
         }
 
         private static void PrintErrorsFromRun(RunCompiler run)
@@ -256,11 +258,26 @@ namespace CompilersAssesment.Test
             //Arrange
             RunCompiler run = new RunCompiler();
             //Act
-            run.Execute(SourceFolder + SyntaxErrors + @"TODOCOPYNAMEHERE.txt");
+            run.Execute(SourceFolder + SyntaxErrors + @"trailingDeclarationComma.txt");
+            //Assert
+            Assert.AreEqual(1, run.ErrorsForTests.Count);
+        }
+
+        #endregion Syntax Errors
+
+        #region ValidTests
+
+        [TestMethod]
+        public void Basic_Success()
+        {
+            //Arrange
+            RunCompiler run = new RunCompiler();
+            //Act
+            run.Execute(SourceFolder + ValidSource + @"trailingDeclarationComma.txt");
             //Assert
             Assert.AreEqual(0, run.ErrorsForTests.Count);
         }
-    }
 
-    #endregion Syntax Errors
+        #region
+    }
 }
