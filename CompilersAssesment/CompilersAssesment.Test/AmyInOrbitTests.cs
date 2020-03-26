@@ -190,9 +190,9 @@ namespace CompilersAssesment.Test
             //Arrange
             RunCompiler run = new RunCompiler();
             //Act
-            run.Execute(SourceFolder + SyntaxErrors + @"TODOCOPYNAMEHERE.txt");
+            run.Execute(SourceFolder + SyntaxErrors + @"noprogname.pal.txt");
             //Assert
-            Assert.AreEqual(0, run.ErrorsForTests.Count);
+            Assert.AreEqual(1, run.ErrorsForTests.Count);
         }
 
         [TestMethod]
@@ -201,9 +201,9 @@ namespace CompilersAssesment.Test
             //Arrange
             RunCompiler run = new RunCompiler();
             //Act
-            run.Execute(SourceFolder + SyntaxErrors + @"TODOCOPYNAMEHERE.txt");
+            run.Execute(SourceFolder + SyntaxErrors + @"noProgram.txt");
             //Assert
-            Assert.AreEqual(0, run.ErrorsForTests.Count);
+            Assert.AreEqual(1, run.ErrorsForTests.Count);
         }
 
         [TestMethod]
@@ -212,20 +212,20 @@ namespace CompilersAssesment.Test
             //Arrange
             RunCompiler run = new RunCompiler();
             //Act
-            run.Execute(SourceFolder + SyntaxErrors + @"TODOCOPYNAMEHERE.txt");
+            run.Execute(SourceFolder + SyntaxErrors + @"noTypeDeclaration.txt");
             //Assert
-            Assert.AreEqual(0, run.ErrorsForTests.Count);
+            Assert.AreEqual(2, run.ErrorsForTests.Count);
         }
 
         [TestMethod]
-        public void NoVariables_Success()
+        public void NoWithOrVariables_Fail()
         {
             //Arrange
             RunCompiler run = new RunCompiler();
             //Act
-            run.Execute(SourceFolder + SyntaxErrors + @"TODOCOPYNAMEHERE.txt");
+            run.Execute(SourceFolder + SyntaxErrors + @"noWithOrVariables.txt");
             //Assert
-            Assert.AreEqual(0, run.ErrorsForTests.Count);
+            Assert.AreEqual(1, run.ErrorsForTests.Count);
         }
 
         [TestMethod]

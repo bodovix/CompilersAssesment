@@ -148,5 +148,16 @@ namespace CompilersAssesment.Test
             //Assert
             Assert.AreEqual(0, run.ErrorsForTests.Count);
         }
+
+        [TestMethod]
+        public void WithButNoVariables_Success()
+        {
+            //Arrange
+            RunCompiler run = new RunCompiler();
+            //Act
+            run.Execute(SourceFolder + @"WithButNoVariables.txt");
+            //Assert
+            Assert.AreEqual(0, run.ErrorsForTests.Count);
+        }
     }
 }
