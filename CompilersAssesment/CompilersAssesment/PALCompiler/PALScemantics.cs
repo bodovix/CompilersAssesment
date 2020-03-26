@@ -99,6 +99,8 @@ namespace CompilersAssesment.PALCompiler
         /// <returns>true or false with a TypeConflictError</returns>
         public bool CheckMatch(IToken token, int leftTokenLangType, int rightTokenLangType)
         {
+            //don't bother checking if its undefined. that error has already been logged
+            //and the check doesn't make much sense with undefined
             if (leftTokenLangType == LanguageType.Undefined)
                 return false;
             if (leftTokenLangType != rightTokenLangType)
