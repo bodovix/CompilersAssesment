@@ -14,7 +14,7 @@ namespace CompilersAssesment.Test
 
         public FirstRepo()
         {
-            SourceFolder = @"C:\Users\Gwydion\source\repos\UNIVERSITY\CompilersAssesment\CompilersAssesment\CompilersAssesment\TestSourceFIles\";
+            SourceFolder = @"C:\Users\Gwydion\source\repos\UNIVERSITY\CompilersAssesment\CompilersAssesment\CompilersAssesment.Test\TestSourceFIles\";
             SemanticErrors = @"GithubPpl\first\semantic-errors\";
             SyntaxErrors = @"GithubPpl\first\syntax-errors\";
             ValidSource = @"GithubPpl\first\valid\";

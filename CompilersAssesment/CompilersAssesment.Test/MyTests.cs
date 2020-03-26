@@ -11,7 +11,7 @@ namespace CompilersAssesment.Test
 
         public MyTests()
         {
-            SourceFolder = @"C:\Users\Gwydion\source\repos\UNIVERSITY\CompilersAssesment\CompilersAssesment\CompilersAssesment\TestSourceFIles\";
+            SourceFolder = @"C:\Users\Gwydion\source\repos\UNIVERSITY\CompilersAssesment\CompilersAssesment\CompilersAssesment.Test\TestSourceFIles\";
         }
 
         private static void PrintErrorsFromRun(RunCompiler run)
