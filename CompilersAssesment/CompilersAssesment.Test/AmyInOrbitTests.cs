@@ -15,9 +15,9 @@ namespace CompilersAssesment.Test
         public AmyInOrbitTests()
         {
             SourceFolder = @"C:\Users\Gwydion\source\repos\UNIVERSITY\CompilersAssesment\CompilersAssesment\CompilersAssesment\TestSourceFIles\";
-            SemanticErrors = @"GithubPpl\Amyinorbit\semantic-errors\";
-            SyntaxErrors = @"GithubPpl\Amyinorbit\syntax-errors\";
-            ValidSource = @"GithubPpl\Amyinorbit\valid\";
+            SemanticErrors = @"GithubPpl\first\semantic-errors\";
+            SyntaxErrors = @"GithubPpl\first\syntax-errors\";
+            ValidSource = @"GithubPpl\first\valid\";
         }
 
         private static void PrintErrorsFromRun(RunCompiler run)
@@ -278,6 +278,72 @@ namespace CompilersAssesment.Test
             Assert.AreEqual(0, run.ErrorsForTests.Count);
         }
 
-        #region
+        [TestMethod]
+        public void EmptyIfElse_Success()
+        {
+            //Arrange
+            RunCompiler run = new RunCompiler();
+            //Act
+            run.Execute(SourceFolder + ValidSource + @"trailingDeclarationComma.txt");
+            //Assert
+            Assert.AreEqual(0, run.ErrorsForTests.Count);
+        }
+
+        [TestMethod]
+        public void EmptyLoop_Success()
+        {
+            //Arrange
+            RunCompiler run = new RunCompiler();
+            //Act
+            run.Execute(SourceFolder + ValidSource + @"trailingDeclarationComma.txt");
+            //Assert
+            Assert.AreEqual(0, run.ErrorsForTests.Count);
+        }
+
+        [TestMethod]
+        public void Factorial_Success()
+        {
+            //Arrange
+            RunCompiler run = new RunCompiler();
+            //Act
+            run.Execute(SourceFolder + ValidSource + @"trailingDeclarationComma.txt");
+            //Assert
+            Assert.AreEqual(0, run.ErrorsForTests.Count);
+        }
+
+        [TestMethod]
+        public void Fibonachi_Success()
+        {
+            //Arrange
+            RunCompiler run = new RunCompiler();
+            //Act
+            run.Execute(SourceFolder + ValidSource + @"trailingDeclarationComma.txt");
+            //Assert
+            Assert.AreEqual(0, run.ErrorsForTests.Count);
+        }
+
+        [TestMethod]
+        public void NestedFor_Success()
+        {
+            //Arrange
+            RunCompiler run = new RunCompiler();
+            //Act
+            run.Execute(SourceFolder + ValidSource + @"trailingDeclarationComma.txt");
+            //Assert
+            Assert.AreEqual(0, run.ErrorsForTests.Count);
+        }
+
+        [TestMethod]
+        public void Squares_Success()
+        {
+            //Arrange
+            RunCompiler run = new RunCompiler();
+            //Act
+            run.Execute(SourceFolder + ValidSource + @"trailingDeclarationComma.txt");
+            //Assert
+            Assert.AreEqual(0, run.ErrorsForTests.Count);
+        }
+
+        #endregion ValidTests
     }
 }
