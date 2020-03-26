@@ -116,6 +116,18 @@ namespace CompilersAssesment.Test
         }
 
         [TestMethod]
+        public void EmptyFile_Fail()
+        {
+            //Arrange
+            RunCompiler run = new RunCompiler();
+            //Act
+            run.Execute(SourceFolder + @"EmptyFile.txt");
+            PrintErrorsFromRun(run);
+            //Assert
+            Assert.AreEqual(1, run.ErrorsForTests.Count);
+        }
+
+        [TestMethod]
         public void Invalid_Invalid_IntAssignedToReal_Fail()
         {
             //Arrange
@@ -134,6 +146,17 @@ namespace CompilersAssesment.Test
             RunCompiler run = new RunCompiler();
             //Act
             run.Execute(SourceFolder + @"valid1.txt");
+            //Assert
+            Assert.AreEqual(0, run.ErrorsForTests.Count);
+        }
+
+        [TestMethod]
+        public void Valid2_Success()
+        {
+            //Arrange
+            RunCompiler run = new RunCompiler();
+            //Act
+            run.Execute(SourceFolder + @"valid2.txt");
             //Assert
             Assert.AreEqual(0, run.ErrorsForTests.Count);
         }
