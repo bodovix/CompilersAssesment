@@ -89,7 +89,7 @@ namespace CompilersAssesment.PALCompiler
 
         private void RecIO()
         {
-            if (have("PUT"))
+            if (have("INPUT"))
             {
                 mustBe("INPUT");
                 List<IToken> tokensInInput = RecIdentList();

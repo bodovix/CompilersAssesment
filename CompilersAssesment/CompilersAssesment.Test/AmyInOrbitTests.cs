@@ -234,9 +234,9 @@ namespace CompilersAssesment.Test
             //Arrange
             RunCompiler run = new RunCompiler();
             //Act
-            run.Execute(SourceFolder + SyntaxErrors + @"TODOCOPYNAMEHERE.txt");
+            run.Execute(SourceFolder + SyntaxErrors + @"rvalueAssignment.txt");
             //Assert
-            Assert.AreEqual(0, run.ErrorsForTests.Count);
+            Assert.AreEqual(2, run.ErrorsForTests.Count);
         }
 
         [TestMethod]
@@ -245,9 +245,9 @@ namespace CompilersAssesment.Test
             //Arrange
             RunCompiler run = new RunCompiler();
             //Act
-            run.Execute(SourceFolder + SyntaxErrors + @"TODOCOPYNAMEHERE.txt");
+            run.Execute(SourceFolder + SyntaxErrors + @"statementAfterProgram.txt");
             //Assert
-            Assert.AreEqual(0, run.ErrorsForTests.Count);
+            Assert.AreEqual(1, run.ErrorsForTests.Count);
         }
 
         [TestMethod]
