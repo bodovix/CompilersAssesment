@@ -199,7 +199,7 @@ namespace CompilersAssesment.Test
             //Act
             run.Execute(SourceFolder + GwydMissingKeywords + @"INPUTMissingIdentifiers.txt");
             //Assert
-            Assert.AreEqual(0, run.ErrorsForTests.Count);
+            Assert.AreEqual(2, run.ErrorsForTests.Count);
         }
 
         [TestMethod]
@@ -210,11 +210,11 @@ namespace CompilersAssesment.Test
             //Act
             run.Execute(SourceFolder + GwydMissingKeywords + @"MissingAS.txt");
             //Assert
-            Assert.AreEqual(0, run.ErrorsForTests.Count);
+            Assert.AreEqual(1, run.ErrorsForTests.Count);
         }
 
         [TestMethod]
-        public void MissingELSE_Fail()
+        public void MissingELSE_Success()
         {
             //Arrange
             RunCompiler run = new RunCompiler();
@@ -232,7 +232,7 @@ namespace CompilersAssesment.Test
             //Act
             run.Execute(SourceFolder + GwydMissingKeywords + @"MissingEND.txt");
             //Assert
-            Assert.AreEqual(0, run.ErrorsForTests.Count);
+            Assert.AreEqual(1, run.ErrorsForTests.Count);
         }
 
         [TestMethod]
@@ -243,7 +243,7 @@ namespace CompilersAssesment.Test
             //Act
             run.Execute(SourceFolder + GwydMissingKeywords + @"MissingENDIF.txt");
             //Assert
-            Assert.AreEqual(0, run.ErrorsForTests.Count);
+            Assert.AreEqual(1, run.ErrorsForTests.Count);
         }
 
         [TestMethod]
@@ -254,7 +254,7 @@ namespace CompilersAssesment.Test
             //Act
             run.Execute(SourceFolder + GwydMissingKeywords + @"MissingENDLOOP.txt");
             //Assert
-            Assert.AreEqual(0, run.ErrorsForTests.Count);
+            Assert.AreEqual(1, run.ErrorsForTests.Count);
         }
 
         [TestMethod]
@@ -265,7 +265,7 @@ namespace CompilersAssesment.Test
             //Act
             run.Execute(SourceFolder + GwydMissingKeywords + @"MissingIF.txt");
             //Assert
-            Assert.AreEqual(0, run.ErrorsForTests.Count);
+            Assert.AreEqual(1, run.ErrorsForTests.Count);
         }
 
         [TestMethod]
@@ -276,7 +276,7 @@ namespace CompilersAssesment.Test
             //Act
             run.Execute(SourceFolder + GwydMissingKeywords + @"MissingIN.txt");
             //Assert
-            Assert.AreEqual(0, run.ErrorsForTests.Count);
+            Assert.AreEqual(2, run.ErrorsForTests.Count);
         }
 
         [TestMethod]
@@ -287,7 +287,7 @@ namespace CompilersAssesment.Test
             //Act
             run.Execute(SourceFolder + GwydMissingKeywords + @"MissingPROGRAM.txt");
             //Assert
-            Assert.AreEqual(0, run.ErrorsForTests.Count);
+            Assert.AreEqual(1, run.ErrorsForTests.Count);
         }
 
         [TestMethod]
@@ -298,7 +298,7 @@ namespace CompilersAssesment.Test
             //Act
             run.Execute(SourceFolder + GwydMissingKeywords + @"MissingREPEAT.txt");
             //Assert
-            Assert.AreEqual(0, run.ErrorsForTests.Count);
+            Assert.AreEqual(1, run.ErrorsForTests.Count);
         }
 
         [TestMethod]
@@ -309,7 +309,7 @@ namespace CompilersAssesment.Test
             //Act
             run.Execute(SourceFolder + GwydMissingKeywords + @"MissingTHEN.txt");
             //Assert
-            Assert.AreEqual(0, run.ErrorsForTests.Count);
+            Assert.AreEqual(1, run.ErrorsForTests.Count);
         }
 
         [TestMethod]
@@ -320,7 +320,18 @@ namespace CompilersAssesment.Test
             //Act
             run.Execute(SourceFolder + GwydMissingKeywords + @"MissingUNITL.txt");
             //Assert
-            Assert.AreEqual(0, run.ErrorsForTests.Count);
+            Assert.AreEqual(1, run.ErrorsForTests.Count);
+        }
+
+        [TestMethod]
+        public void UNTILMissingExpression_Fail()
+        {
+            //Arrange
+            RunCompiler run = new RunCompiler();
+            //Act
+            run.Execute(SourceFolder + GwydMissingKeywords + @"UNITLMissingExpression.txt");
+            //Assert
+            Assert.AreEqual(1, run.ErrorsForTests.Count);
         }
 
         [TestMethod]
@@ -331,7 +342,7 @@ namespace CompilersAssesment.Test
             //Act
             run.Execute(SourceFolder + GwydMissingKeywords + @"MissingWith.txt");
             //Assert
-            Assert.AreEqual(0, run.ErrorsForTests.Count);
+            Assert.AreEqual(1, run.ErrorsForTests.Count);
         }
 
         [TestMethod]
@@ -342,7 +353,7 @@ namespace CompilersAssesment.Test
             //Act
             run.Execute(SourceFolder + GwydMissingKeywords + @"OUTPUTMissingIdentifiers.txt");
             //Assert
-            Assert.AreEqual(0, run.ErrorsForTests.Count);
+            Assert.AreEqual(1, run.ErrorsForTests.Count);
         }
 
         #endregion MissingKeywords
