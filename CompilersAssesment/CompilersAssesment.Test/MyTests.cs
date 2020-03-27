@@ -8,10 +8,12 @@ namespace CompilersAssesment.Test
     public class MyTests
     {
         public string SourceFolder { get; set; }
+        public string GwydMissingKeywords { get; set; }
 
         public MyTests()
         {
             SourceFolder = @"C:\Users\Gwydion\source\repos\UNIVERSITY\CompilersAssesment\CompilersAssesment\CompilersAssesment.Test\TestSourceFIles\";
+            GwydMissingKeywords = @"GwydMissingKeywords\";
         }
 
         private static void PrintErrorsFromRun(RunCompiler run)
@@ -19,6 +21,8 @@ namespace CompilersAssesment.Test
             foreach (string s in run.ErrorsForTests)
                 Trace.WriteLine(s);
         }
+
+        #region NormalTests
 
         [TestMethod]
         public void GwydTestFile_Success()
@@ -182,5 +186,22 @@ namespace CompilersAssesment.Test
             //Assert
             Assert.AreEqual(0, run.ErrorsForTests.Count);
         }
+
+        #endregion NormalTests
+
+        #region MissingKeywords
+
+        [TestMethod]
+        public void MissingProgram_Fail()
+        {
+            //Arrange
+            RunCompiler run = new RunCompiler();
+            //Act
+            run.Execute(SourceFolder + GwydMissingKeywords + @"validDeclarations.txt");
+            //Assert
+            Assert.AreEqual(0, run.ErrorsForTests.Count);
+        }
+
+        #endregion MissingKeywords
     }
 }
