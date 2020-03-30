@@ -27,7 +27,7 @@ namespace CompilersAssesment.PALCompiler
             }
             else
             {
-                symbols.Add(new VarSymbol(tokenToAddtoSymbolsTree, languageType));// need to set currentType - this replaced
+                symbols.Add(new VarSymbol(tokenToAddtoSymbolsTree, languageType));//no need to set currentType - this replaced
             }
         }
 
