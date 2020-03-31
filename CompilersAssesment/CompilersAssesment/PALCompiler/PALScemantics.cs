@@ -39,7 +39,10 @@ namespace CompilersAssesment.PALCompiler
         /// <returns>language type for the token</returns>
         public int CheckId(IToken tokenToCheck)
         {
-            if (!Scope.CurrentScope.IsDefined(tokenToCheck.TokenValue))
+            //if its not an identifier do the type check but don't check if declared
+            if (!tokenToCheck.Is(Token.IdentifierToken))
+                return (CheckType(tokenToCheck));
+            else if (!Scope.CurrentScope.IsDefined(tokenToCheck.TokenValue))
             {
                 semanticError(new NotDeclaredError(tokenToCheck));
                 return LanguageType.Undefined;
@@ -55,7 +58,7 @@ namespace CompilersAssesment.PALCompiler
         /// </summary>
         /// <param name="token">The token of which to get the language type for</param>
         /// <returns>Language Type for the token</returns>
-        public int CheckType(IToken token)
+        private int CheckType(IToken token)
         {
             int thisLanguageType = LanguageType.Undefined;
             if (token.Is(Token.IdentifierToken))

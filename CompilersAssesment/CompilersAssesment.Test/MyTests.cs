@@ -187,6 +187,50 @@ namespace CompilersAssesment.Test
             Assert.AreEqual(0, run.ErrorsForTests.Count);
         }
 
+        [TestMethod]
+        public void UndeclaredIdentiferIn_IFStatment_Fail()
+        {
+            //Arrange
+            RunCompiler run = new RunCompiler();
+            //Act
+            run.Execute(SourceFolder + @"Invalid_UndeclaredIdentiferIn_IfStatment.txt");
+            //Assert
+            Assert.AreEqual(6, run.ErrorsForTests.Count);
+        }
+
+        [TestMethod]
+        public void UndeclaredIdentiferIn_INPUT_Fail()
+        {
+            //Arrange
+            RunCompiler run = new RunCompiler();
+            //Act
+            run.Execute(SourceFolder + @"Invalid_UndeclaredIdentiferIn_INPUT.txt");
+            //Assert
+            Assert.AreEqual(1, run.ErrorsForTests.Count);
+        }
+
+        [TestMethod]
+        public void UndeclaredIdentiferIn_OUTPUT_Fail()
+        {
+            //Arrange
+            RunCompiler run = new RunCompiler();
+            //Act
+            run.Execute(SourceFolder + @"Invalid_UndeclaredIdentiferIn_OUTPUT - Copy.txt");
+            //Assert
+            Assert.AreEqual(1, run.ErrorsForTests.Count);
+        }
+
+        [TestMethod]
+        public void UndeclaredIdentiferIn_LOOP_Fail()
+        {
+            //Arrange
+            RunCompiler run = new RunCompiler();
+            //Act
+            run.Execute(SourceFolder + @"Invalid_UndeclaredIdentifierIn_Loop.txt");
+            //Assert
+            Assert.AreEqual(3, run.ErrorsForTests.Count);
+        }
+
         #endregion NormalTests
 
         #region MissingKeywords
@@ -199,7 +243,7 @@ namespace CompilersAssesment.Test
             //Act
             run.Execute(SourceFolder + GwydMissingKeywords + @"INPUTMissingIdentifiers.txt");
             //Assert
-            Assert.AreEqual(2, run.ErrorsForTests.Count);
+            Assert.AreEqual(1, run.ErrorsForTests.Count);
         }
 
         [TestMethod]
