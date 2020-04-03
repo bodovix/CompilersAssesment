@@ -9,8 +9,6 @@ namespace CompilersAssesment
 {
     internal class Program
     {
-        //==================PARSER CHECKS
-
         public static void Main(String[] args)
         {
             if (args.Length != 1)
@@ -22,6 +20,4 @@ namespace CompilersAssesment
             run.Execute(args[0]);
         }
     }
-
-    //=======================================
 }
