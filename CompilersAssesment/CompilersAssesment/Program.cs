@@ -15,7 +15,7 @@ namespace CompilersAssesment
         {
             if (args.Length != 1)
             {
-                Console.WriteLine("Invalid usage: PAL <filename>");
+                Console.WriteLine("Invalid number of command arguments");
                 return;
             }
             RunCompiler run = new RunCompiler();
