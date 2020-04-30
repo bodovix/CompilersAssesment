@@ -18,11 +18,6 @@ namespace CompilersAssesment
             }
             RunCompiler run = new RunCompiler();
             run.Execute(args[0]);
-
-            //output errors if there are any
-            if (run.ErrorsForTests != null)
-                foreach (string err in run.ErrorsForTests)
-                    Console.WriteLine(err);
         }
     }
 }
